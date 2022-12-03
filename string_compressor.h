@@ -9,8 +9,8 @@ public:
   StringCompressor();
   ~StringCompressor();
 
-  int compress(std::string &input_string, std::vector<std::byte> &output_data);
-  int decompress(std::vector<std::byte> &input_data, std::string &output_string);
+  size_t compress(std::string &input_string, std::vector<std::byte> &output_data);
+  size_t decompress(std::vector<std::byte> &input_data, std::string &output_string);
 
 private:
   std::unordered_map<std::string, unsigned char> englist_table;

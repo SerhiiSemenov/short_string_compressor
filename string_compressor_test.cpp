@@ -29,15 +29,8 @@ int main(void) {
     for (auto & element : test_strings) {
         std::cout << element << " size: "<< utf8len(element.c_str()) << std::endl;
         int comprlen = compressor.compress(element, compressed_str);
-        // std::cout << "Compress res: ";
-        // if (compressed_str.size() > 0) {
-            // for (auto &byte_in_str : compressed_str) {
-            //     std::cout << static_cast<int>(byte_in_str) << "-";
-            // }
-            // std::cout << std::endl;
-        // }
         int comprlevel = 100 -((100*comprlen)/utf8len(element.c_str()));
-        int decomplen = compressor.decompress(compressed_str, decompressed_str);
+        size_t decomplen = compressor.decompress(compressed_str, decompressed_str);
 
         std::cout << "Out str: " << decompressed_str << std::endl;
 
@@ -48,9 +41,9 @@ int main(void) {
             exit(1);
         }
         if (comprlevel < 0) {
-            std::cout << " -----------------------------------------" << std::endl;
-            std::cout << "| enlarged by " << comprlevel << " |" << std::endl;
-            std::cout << " -----------------------------------------" << std::endl;
+            std::cout << " --------------------------" << std::endl;
+            std::cout << "| enlarged by " << comprlevel << "           |" << std::endl;
+            std::cout << " --------------------------" << std::endl;
         }
         else {
             std::cout << " -----------------------------------------" << std::endl;
@@ -62,7 +55,6 @@ int main(void) {
         std::cout << std::endl;
         decompressed_str.clear();
         compressed_str.clear();
-        // std::cout << "Clear - " << decompressed_str << std::endl;
     }
 }
 

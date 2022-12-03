@@ -6,7 +6,6 @@
 enum class SymbolTables { UA_TABLE, EN_TABLE, SYMBOLS_TABLE, END_OF_LIST };
 using IntType = typename std::underlying_type<SymbolTables>::type;
 
-// Special behavior for ++Colors
 SymbolTables& operator++( SymbolTables &c ) {
   c = static_cast<SymbolTables>( static_cast<IntType>(c) + 1 );
   if ( c == SymbolTables::END_OF_LIST )
@@ -15,22 +14,22 @@ SymbolTables& operator++( SymbolTables &c ) {
 }
 
 static const char *englist_decode_table[] = {
-/*16*/  "ua_table", "WERE", "symbols_table", "WHICH", "THIS", "THAT", "WITH", "FROM", "HAVE", "MEM", "THERE", "ASS", "WHI", "AND", "THEIR", "THEY", "THE", ".COM",
-/*32*/  "WAS", "THE", " MA", "EN ", "E A", "S A", "E C", "S, ", "D T", "AT ", "ALL", "HAT", "E T", "F T", "E S", "TIO",
-/*48*/ "ATI", "HAD", "ONE", "ARE", "HER", "HIS", "THA", "TER", "DIV", "ERE", "ENT", " OF", "ION", "FOR", "ING", "BUT",
-/*64*/ "OUT", "WHO", "ITS", "ATE", "VER", "E, IT", "NOT", "OF ", "N ", "OR", "AS", "IT", "IS", "AT", "RE", "T ",
-/*80*/ "ER", "EN", "  ", " W", "ES", " AN", " I", "F ", "ND", " S", "ND ", "ED ", "ED", "HTTP://",  "TE", "Y ",
-/*96*/  "D ", " C", "TI", "R ",  "ST", " IN", "AR", "NT", "OF", " TO",  "NG", " H", "LE", "AL", "TO ", "OU",
-/*112*/ "BE", " O", " B", "SE", "O ",  "HA", "NG ", " TH",  "HI",  " F", "IN ", "DE",  "ME", "VE", "RE ", "RI",
-/*128*/ "RO", "IS ", "CO", "EA", " M", "ER ", " P", "ES ", "BY", "DI", "RA", "IC", "CE", "LA", "H ", "NE",
-/*144*/ "AS ",  "ON ", "N T", "IO", "WE", " A ", "OM", ", A", "S O", "UR", "LI", "LL", "CH", "G ", "E\r\n", " WH",
-/*160*/ " CO", "E O", "A ", "US", " D", "SS", " BE", " E", "MA", "ON", "T T", "OR ",  "EL", "SO", "L ",  "S,",
-/*176*/ "NO", " WA", "IV", "HO", " R",  "S T", "NS", "CH ", "WH", "TR", "UT", "LY ", "TA", " HA", " ON", " L",
-/*192*/ "PE", " RE",  "SI", " FO", "WA", "EC",  "FO", "RS", "OT", "UN", "IM", "TH ", "NC", "AD", " WE", "LY",
-/*208*/ "EE", " GE", "ID", " CL", "AC", "IL", "RT", " WI", " T", "IN", "HE", "TH", "HE ", "TO", "AN", "H",
-/*224*/  "O", " A", "Y", "G", "P", "B", "Z", "E", "T", "A", "I", "N", "S", "E ", "R", "L",
-/*240*/  "S ", "D", "C", "F", "M", "U", "W", "V", "N", "X", "K", " ", " ", " ", " ", " ",
-/*256*/  " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
+    /*16*/  "ua_table", "WERE", "symbols_table", "WHICH", "THIS", "THAT", "WITH", "FROM", "HAVE", "MEM", "THERE", "ASS", "WHI", "AND", "THEIR", "THEY", "THE", ".COM",
+    /*32*/  "WAS", "THE", " MA", "EN ", "E A", "S A", "E C", "S, ", "D T", "AT ", "ALL", "HAT", "E T", "F T", "E S", "TIO",
+    /*48*/ "ATI", "HAD", "ONE", "ARE", "HER", "HIS", "THA", "TER", "DIV", "ERE", "ENT", " OF", "ION", "FOR", "ING", "BUT",
+    /*64*/ "OUT", "WHO", "ITS", "ATE", "VER", "E, IT", "NOT", "OF ", "N ", "OR", "AS", "IT", "IS", "AT", "RE", "T ",
+    /*80*/ "ER", "EN", "  ", " W", "ES", " AN", " I", "F ", "ND", " S", "ND ", "ED ", "ED", "HTTP://",  "TE", "Y ",
+    /*96*/  "D ", " C", "TI", "R ",  "ST", " IN", "AR", "NT", "OF", " TO",  "NG", " H", "LE", "AL", "TO ", "OU",
+    /*112*/ "BE", " O", " B", "SE", "O ",  "HA", "NG ", " TH",  "HI",  " F", "IN ", "DE",  "ME", "VE", "RE ", "RI",
+    /*128*/ "RO", "IS ", "CO", "EA", " M", "ER ", " P", "ES ", "BY", "DI", "RA", "IC", "CE", "LA", "H ", "NE",
+    /*144*/ "AS ",  "ON ", "N T", "IO", "WE", " A ", "OM", ", A", "S O", "UR", "LI", "LL", "CH", "G ", "E\r\n", " WH",
+    /*160*/ " CO", "E O", "A ", "US", " D", "SS", " BE", " E", "MA", "ON", "T T", "OR ",  "EL", "SO", "L ",  "S,",
+    /*176*/ "NO", " WA", "IV", "HO", " R",  "S T", "NS", "CH ", "WH", "TR", "UT", "LY ", "TA", " HA", " ON", " L",
+    /*192*/ "PE", " RE",  "SI", " FO", "WA", "EC",  "FO", "RS", "OT", "UN", "IM", "TH ", "NC", "AD", " WE", "LY",
+    /*208*/ "EE", " GE", "ID", " CL", "AC", "IL", "RT", " WI", " T", "IN", "HE", "TH", "HE ", "TO", "AN", "H",
+    /*224*/  "O", " A", "Y", "G", "P", "B", "Z", "E", "T", "A", "I", "N", "S", "E ", "R", "L",
+    /*240*/  "S ", "D", "C", "F", "M", "U", "W", "V", "N", "X", "K", " ", " ", " ", " ", " ",
+    /*256*/  " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
 };
 
 //res 40-43%
@@ -78,7 +77,7 @@ StringCompressor::StringCompressor() {
 StringCompressor::~StringCompressor() {
 }
 
-int StringCompressor::compress(std::string &input_string, std::vector<std::byte> &output_data) {
+size_t StringCompressor::compress(std::string &input_string, std::vector<std::byte> &output_data) {
     int retry = 0;
     SymbolTables table_id = SymbolTables::UA_TABLE;
     std::unordered_map<std::string, unsigned char> *table_list[] = {&ukraine_table, &englist_table, &symbols_table};
@@ -89,25 +88,21 @@ int StringCompressor::compress(std::string &input_string, std::vector<std::byte>
         do {
             if (auto res = table_ptr->find(input_string.substr(in_str_iter, 4)); res != table_ptr->end()) {
                 output_data.push_back(static_cast<std::byte>(res->second));
-                // std::cout << "Found " << input_string.substr(in_str_iter, 4) << "-" << res->first << " " << static_cast<int>(res->second) << std::endl;
                 in_str_iter+=4;
                 break;
             }
             else if (auto res = table_ptr->find(input_string.substr(in_str_iter, 3)); res != table_ptr->end()) {
                 output_data.push_back(static_cast<std::byte>(res->second));
-                // std::cout << "Found " << input_string.substr(in_str_iter, 3) << "-" << res->first << " " << static_cast<int>(res->second) << std::endl;
                 in_str_iter+=3;
                 break;
             }
             else if (auto res = table_ptr->find(input_string.substr(in_str_iter, 2)); res != table_ptr->end()) {
                 output_data.push_back(static_cast<std::byte>(res->second));
-                // std::cout << "Found " << res->first << " " << static_cast<int>(res->second) << std::endl;
                 in_str_iter+=2;
                 break;
             }
             else if (auto res = table_ptr->find(input_string.substr(in_str_iter, 1)); res != table_ptr->end()) {
                 output_data.push_back(static_cast<std::byte>(res->second));
-                // std::cout << "Found " << res->first << " " << static_cast<int>(res->second) << std::endl;
                 in_str_iter+=1;
                 break;
             }
@@ -117,7 +112,7 @@ int StringCompressor::compress(std::string &input_string, std::vector<std::byte>
                 table_ptr = table_list[static_cast<int>(table_id)];
                 output_data.push_back(static_cast<std::byte>(table_id));
             }
-        } while (retry <= 2);//retry exusted on fail
+        } while (retry <= 2);//retry
         if (retry >= 3) {
             std::cout << "ERROR: Charecter not found" << std::endl;
             break;
@@ -126,7 +121,7 @@ int StringCompressor::compress(std::string &input_string, std::vector<std::byte>
     return output_data.size();
 }
 
-int StringCompressor::decompress(std::vector<std::byte> &input_data, std::string &output_string){
+size_t StringCompressor::decompress(std::vector<std::byte> &input_data, std::string &output_string){
     const char **table_ptr = ukraine_decode_table;
 
     for (auto &input_item : input_data) {
