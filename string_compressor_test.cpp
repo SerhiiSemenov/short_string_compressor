@@ -18,7 +18,7 @@ int main(void) {
         "ПРИВІТ. ЦЕ КОРОТКЕ ПОВІДОМЛЕННЯ WITH THE ENGLISH, PART! ДЛЯ ПЕРЕВІРКИ?",
         "ПРИВІТ. ЯК СПРАВИ ТРЕБА НЕВІДКЛАДНО ТВОЯ ДОПОМОГА",
         "ТОЧНЕ ВЛУЧАННЯ",
-        "THIS IS A SHORT MESSAGE",
+        "HELLO BRANDON, HOW ARE YOU?",
         "THE END",
         "THIS IS A SIMPLE COMPRESSION LIBRARY",
         "NOTHING IS MORE DIFFICULT, AND THEREFORE MORE PRECIOUS, THAT TO BE ABLE TO DECIDE",

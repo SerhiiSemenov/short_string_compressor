@@ -13,12 +13,12 @@ SymbolTables& operator++( SymbolTables &c ) {
   return c;
 }
 
-static const char *englist_decode_table[] = {
-    /*16*/  "ua_table", "WERE", "symbols_table", "WHICH", "THIS", "THAT", "WITH", "FROM", "HAVE", "MEM", "THERE", "ASS", "WHI", "AND", "THEIR", "THEY", "THE", ".COM",
-    /*32*/  "WAS", "THE", " MA", "EN ", "E A", "S A", "E C", "S, ", "D T", "AT ", "ALL", "HAT", "E T", "F T", "E S", "TIO",
-    /*48*/ "ATI", "HAD", "ONE", "ARE", "HER", "HIS", "THA", "TER", "DIV", "ERE", "ENT", " OF", "ION", "FOR", "ING", "BUT",
-    /*64*/ "OUT", "WHO", "ITS", "ATE", "VER", "E, IT", "NOT", "OF ", "N ", "OR", "AS", "IT", "IS", "AT", "RE", "T ",
-    /*80*/ "ER", "EN", "  ", " W", "ES", " AN", " I", "F ", "ND", " S", "ND ", "ED ", "ED", "HTTP://",  "TE", "Y ",
+static const char *englist_decode_table[256] = {
+    /*16*/  "ua_table", "WERE", "symbols_table", "WHICH", "THIS", "THAT", "WITH", "FROM", "HAVE", "MEM", "THERE", "ASS", "WHI", "AND", "THEIR", "THEY",
+    /*32*/  "THE", ".COM", "WAS", "THE", " MA", "EN ", "E A", "S A", "E C", "S, ", "D T", "AT ", "ALL", "HAT", "E T", "F T",
+    /*48*/  "E S", "TIO", "ATI", "HAD", "ONE", "ARE", "HER", "HIS", "THA", "TER", "DIV", "ERE", "ENT", " OF", "ION", "FOR",
+    /*64*/  "ING", "BUT", "OUT", "WHO", "ITS", "ATE", "VER", "E, IT", "NOT", "OF ", "N ", "OR", "AS", "IT", "IS", "AT",
+    /*80*/  "RE", "T ", "ER", "EN", " W", "ES", " AN", " I", "F ", "ND", " S", "ND ", "ED ", "ED", "HTTP://",  "TE",
     /*96*/  "D ", " C", "TI", "R ",  "ST", " IN", "AR", "NT", "OF", " TO",  "NG", " H", "LE", "AL", "TO ", "OU",
     /*112*/ "BE", " O", " B", "SE", "O ",  "HA", "NG ", " TH",  "HI",  " F", "IN ", "DE",  "ME", "VE", "RE ", "RI",
     /*128*/ "RO", "IS ", "CO", "EA", " M", "ER ", " P", "ES ", "BY", "DI", "RA", "IC", "CE", "LA", "H ", "NE",
@@ -26,10 +26,10 @@ static const char *englist_decode_table[] = {
     /*160*/ " CO", "E O", "A ", "US", " D", "SS", " BE", " E", "MA", "ON", "T T", "OR ",  "EL", "SO", "L ",  "S,",
     /*176*/ "NO", " WA", "IV", "HO", " R",  "S T", "NS", "CH ", "WH", "TR", "UT", "LY ", "TA", " HA", " ON", " L",
     /*192*/ "PE", " RE",  "SI", " FO", "WA", "EC",  "FO", "RS", "OT", "UN", "IM", "TH ", "NC", "AD", " WE", "LY",
-    /*208*/ "EE", " GE", "ID", " CL", "AC", "IL", "RT", " WI", " T", "IN", "HE", "TH", "HE ", "TO", "AN", "H",
-    /*224*/  "O", " A", "Y", "G", "P", "B", "Z", "E", "T", "A", "I", "N", "S", "E ", "R", "L",
-    /*240*/  "S ", "D", "C", "F", "M", "U", "W", "V", "N", "X", "K", " ", " ", " ", " ", " ",
-    /*256*/  " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
+    /*208*/ "EE", " GE", "ID", " CL", "AC", "IL", "RT", " WI", " T", "IN", "HE", "TH", "HE ", "TO", "AN", "Y ",
+    /*224*/ " A", "S ", "CA", "ET", "PL", "AP", "OW", "LO", "PR", "DO", "MO", "OS", "KE", "AV", "AY", "UL",
+    /*240*/ " ", "LD", "AM", "FI", "PO", "CT", "D", "C", "F", "M", "U", "W", "V", "N", "X", "K",
+    /*256*/ "H", "O", "Y", "G", "P", "B", "Z", "E", "T", "A", "I", "N", "S", "E ", "R", "L"
 };
 
 //res 40-43%
