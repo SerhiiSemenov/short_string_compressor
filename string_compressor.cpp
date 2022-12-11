@@ -53,10 +53,10 @@ static const char *ukraine_decode_table[] = {
 };
 
 static const char *symbols_decode_table[] = {
-    /*16*/ "ua_table", "en_table", ".", "?", "!", ", ", ":", ";", "\"", "#", "$", "%", "&", "\'", "(", ")",
-    /*32*/ "*", "+", "-",  "<", "=", ">", "/", ", ", "\n\r\n", "\r\n\r", "=\"", "><", "\r\n", "\n", "\r", "0",
-    /*48*/ "1", "2", "3", "4", "5", "6", "7", "8", "9"
-    /*64*/
+    /*16*/ "ua_table", "en_table", ".", "?", "!", ",", ":", ";", "\"", "#", "$", "%", "&", "\'", "(", ")",
+    /*32*/ "*", "+", "-",  "<", "=", ">", "/", ", ", "\n\r\n", "\r\n\r", "=\"", "><", "\r\n", "\n", "\r", "?\n",
+    /*48*/ "!\n", ",", ":", ";\n" "? ", "! ", ", ", ": ", "; ", "0", "1", "2", "3", "4", "5", "6",
+    /*64*/ "7", "8", "9"
 };
 
 StringCompressor::StringCompressor() {
@@ -114,7 +114,7 @@ size_t StringCompressor::compress(std::string &input_string, std::vector<std::by
             }
         } while (retry <= 2);//retry
         if (retry >= 3) {
-            std::cout << "ERROR: Charecter not found" << std::endl;
+            throw std::invalid_argument( std::string("Charecter not found at position: ") + std::to_string(static_cast<int>(in_str_iter)));
             break;
         }
     }
@@ -123,19 +123,27 @@ size_t StringCompressor::compress(std::string &input_string, std::vector<std::by
 
 size_t StringCompressor::decompress(std::vector<std::byte> &input_data, std::string &output_string){
     const char **table_ptr = ukraine_decode_table;
+    size_t table_size = sizeof(ukraine_decode_table)/sizeof(ukraine_decode_table[0]);
 
     for (auto &input_item : input_data) {
         if (static_cast<int>(input_item) == static_cast<IntType>(SymbolTables::UA_TABLE) && table_ptr != ukraine_decode_table) {
             table_ptr = ukraine_decode_table;
+            table_size = sizeof(ukraine_decode_table)/sizeof(ukraine_decode_table[0]);
             continue;
         }
         else if(static_cast<int>(input_item) == static_cast<IntType>(SymbolTables::EN_TABLE) && table_ptr != englist_decode_table) {
             table_ptr = englist_decode_table;
+            table_size = sizeof(englist_decode_table)/sizeof(englist_decode_table[0]);
             continue;
         }
         else if (static_cast<int>(input_item) == static_cast<IntType>(SymbolTables::SYMBOLS_TABLE) && table_ptr != symbols_decode_table) {
             table_ptr = symbols_decode_table;
+            table_size = sizeof(symbols_decode_table)/sizeof(symbols_decode_table[0]);
             continue;
+        }
+
+        if (static_cast<int>(input_item) > table_size) {
+            throw std::invalid_argument( std::string("Charecter not found by code: ") + std::to_string(static_cast<int>(input_item)));
         }
         output_string += table_ptr[static_cast<int>(input_item)];
     }

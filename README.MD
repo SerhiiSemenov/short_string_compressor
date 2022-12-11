@@ -14,12 +14,12 @@ To compare this with other libraries, think that like zlib will usually not be a
 |ПРИВІТ. ЦЕ КОРОТКЕ ПОВІДОМЛЕННЯ WITH THE ENGLISH, PART! ДЛЯ ПЕРЕВІРКИ?| compressed by 33% string size: (70->47)|
 |ПРИВІТ. ЯК СПРАВИ ТРЕБА НЕВІДКЛАДНО ТВОЯ ДОПОМОГА| compressed by 47% string size: (49->26)|
 |ТОЧНЕ ВЛУЧАННЯ| compressed by 43% string size: (14->8)|
-|THIS IS A SHORT MESSAGE| compressed by 44% string size: (23->13)|
+|HELLO BRANDON, HOW ARE YOU?| compressed by 26% string size: (27->20)|
 |THE END| compressed by 43% string size: (7->4)|
-|THIS IS A SIMPLE COMPRESSION LIBRARY| compressed by 45% string size: (36->20)|
-|NOTHING IS MORE DIFFICULT, AND THEREFORE MORE PRECIOUS, THAT TO BE ABLE TO DECIDE| compressed by 46% string size: (81->44)|
-|THIS IS AN EXAMPLE OF WHAT WORKS VERY WELL WITH LIBRARY| compressed by 48% string size: (55->29)|
-|1000 NUMBERS 2000 WILL 10 20 30 COMPRESS VERY LITTL| Eenlarged by -7|
+|THIS IS A SIMPLE COMPRESSION LIBRARY| compressed by 50% string size: (36->18)|
+|NOTHING IS MORE DIFFICULT, AND THEREFORE MORE PRECIOUS, THAT TO BE ABLE TO DECIDE| compressed by 51% string size: (81->40)|
+|THIS IS AN EXAMPLE OF WHAT WORKS VERY WELL WITH LIBRARY| compressed by 50% string size: (55->28)|
+|1000 NUMBERS 2000 WILL 10 20 30 COMPRESS VERY LITTL| enlarged by -5|
 
 ## Usage
 -----
