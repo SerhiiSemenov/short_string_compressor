@@ -6,14 +6,14 @@
 enum class SymbolTables { UA_TABLE, EN_TABLE, SYMBOLS_TABLE, END_OF_LIST };
 using IntType = typename std::underlying_type<SymbolTables>::type;
 
-SymbolTables& operator++( SymbolTables &c ) {
+static SymbolTables& operator++( SymbolTables &c ) {
   c = static_cast<SymbolTables>( static_cast<IntType>(c) + 1 );
   if ( c == SymbolTables::END_OF_LIST )
     c = static_cast<SymbolTables>(0);
   return c;
 }
 
-static const char *englist_decode_table[256] = {
+static constexpr const char *englist_decode_table[256] = {
     /*16*/  "ua_table", "WERE", "symbols_table", "WHICH", "THIS", "THAT", "WITH", "FROM", "HAVE", "MEM", "THERE", "ASS", "WHI", "AND", "THEIR", "THEY",
     /*32*/  "THE", ".COM", "WAS", "THE", " MA", "EN ", "E A", "S A", "E C", "S, ", "D T", "AT ", "ALL", "HAT", "E T", "F T",
     /*48*/  "E S", "TIO", "ATI", "HAD", "ONE", "ARE", "HER", "HIS", "THA", "TER", "DIV", "ERE", "ENT", " OF", "ION", "FOR",
@@ -33,7 +33,7 @@ static const char *englist_decode_table[256] = {
 };
 
 //res 40-43%
-static const char *ukraine_decode_table[] = {
+static constexpr const char *ukraine_decode_table[] = {
     /*16*/ " П", "en_table", "symbols_table", "О ", " В", " З", "А ", "И ", "НО", "СТ", " Д", " Н", "НА", ", ", "Я ", "РО",
     /*32*/ "У ", "І ", "ЕН", "ОВ", "Е ", "ТА", "ПР", "ПО", "НЯ", "НИ", "АН", " Т", " С", "ОР", "ВА", "КО",
     /*48*/ "ТИ", "ГО", "ЕР", "ІД", "РА", "ВІ", "ЛЬ", "ДО", " Р", "ОГ", "ВИ", "ЗА", "МЕ", " О", "АТ", "НЕ",
@@ -52,29 +52,30 @@ static const char *ukraine_decode_table[] = {
     /*256*/ "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "І", "Ь", "Є", "Ю", "Я", " "
 };
 
-static const char *symbols_decode_table[] = {
+static constexpr const char *symbols_decode_table[] = {
     /*16*/ "ua_table", "en_table", ".", "?", "!", ",", ":", ";", "\"", "#", "$", "%", "&", "\'", "(", ")",
     /*32*/ "*", "+", "-",  "<", "=", ">", "/", ", ", "\n\r\n", "\r\n\r", "=\"", "><", "\r\n", "\n", "\r", "?\n",
-    /*48*/ "!\n", ",", ":", ";\n" "? ", "! ", ", ", ": ", "; ", "0", "1", "2", "3", "4", "5", "6",
+    /*48*/ "!\n", ",", ":", ";\n", "? ", "! ", ", ", ": ", "; ", "0", "1", "2", "3", "4", "5", "6",
     /*64*/ "7", "8", "9"
 };
 
+template<typename T, size_t N>
+static constexpr int lengthof(const T (&)[N]) { return N; }
+
 StringCompressor::StringCompressor() {
     //make hash table for the english character
-    for (int arr_position = 0; arr_position < static_cast<int>(sizeof(englist_decode_table)/sizeof(englist_decode_table[0])); arr_position++) {
+
+    for (int arr_position = 0; arr_position < lengthof(englist_decode_table); arr_position++) {
         this->englist_table[englist_decode_table[arr_position]] = arr_position;
     }
     //make hash table for the ukraine character
-    for (int arr_position = 0; arr_position < static_cast<int>(sizeof(ukraine_decode_table)/sizeof(ukraine_decode_table[0])); arr_position++) {
+    for (int arr_position = 0; arr_position < lengthof(ukraine_decode_table); arr_position++) {
         this->ukraine_table[ukraine_decode_table[arr_position]] = arr_position;
     }
     //make hash table for the symbols
-    for (int arr_position = 0; arr_position < static_cast<int>(sizeof(symbols_decode_table)/sizeof(symbols_decode_table[0])); arr_position++) {
+    for (int arr_position = 0; arr_position < lengthof(symbols_decode_table); arr_position++) {
         this->symbols_table[symbols_decode_table[arr_position]] = arr_position;
     }
-}
-
-StringCompressor::~StringCompressor() {
 }
 
 size_t StringCompressor::compress(std::string &input_string, std::vector<std::byte> &output_data) {
@@ -122,23 +123,23 @@ size_t StringCompressor::compress(std::string &input_string, std::vector<std::by
 }
 
 size_t StringCompressor::decompress(std::vector<std::byte> &input_data, std::string &output_string){
-    const char **table_ptr = ukraine_decode_table;
-    size_t table_size = sizeof(ukraine_decode_table)/sizeof(ukraine_decode_table[0]);
+    const char* const* table_ptr = ukraine_decode_table;
+    int table_size = lengthof(ukraine_decode_table);
 
     for (auto &input_item : input_data) {
         if (static_cast<int>(input_item) == static_cast<IntType>(SymbolTables::UA_TABLE) && table_ptr != ukraine_decode_table) {
             table_ptr = ukraine_decode_table;
-            table_size = sizeof(ukraine_decode_table)/sizeof(ukraine_decode_table[0]);
+            table_size = lengthof(ukraine_decode_table);
             continue;
         }
         else if(static_cast<int>(input_item) == static_cast<IntType>(SymbolTables::EN_TABLE) && table_ptr != englist_decode_table) {
             table_ptr = englist_decode_table;
-            table_size = sizeof(englist_decode_table)/sizeof(englist_decode_table[0]);
+            table_size = lengthof(englist_decode_table);
             continue;
         }
         else if (static_cast<int>(input_item) == static_cast<IntType>(SymbolTables::SYMBOLS_TABLE) && table_ptr != symbols_decode_table) {
             table_ptr = symbols_decode_table;
-            table_size = sizeof(symbols_decode_table)/sizeof(symbols_decode_table[0]);
+            table_size = lengthof(symbols_decode_table);
             continue;
         }
 
