@@ -7,7 +7,10 @@ class StringCompressor {
 
 public:
   StringCompressor();
-  ~StringCompressor();
+  ~StringCompressor() = default;
+  StringCompressor(const StringCompressor&) = delete;
+  StringCompressor(StringCompressor&&) = delete;
+  StringCompressor operator=(const StringCompressor&) = delete;
 
   size_t compress(std::string &input_string, std::vector<std::byte> &output_data);
   size_t decompress(std::vector<std::byte> &input_data, std::string &output_string);
